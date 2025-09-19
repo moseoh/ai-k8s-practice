@@ -1,0 +1,1 @@
+- [ ] nfs server allowed ip 변경 (gcp ip 변경되었음)
