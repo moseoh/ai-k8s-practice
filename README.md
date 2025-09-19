@@ -51,11 +51,6 @@ flowchart TB
     Worker3 --> NFS
     GPU --> NFS
 
-    classDef control-plan fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    classDef worker fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
-    classDef nfs fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
-    classDef gpu fill:#fff3e0,stroke:#e65100,stroke-width:2px
-
     class ControlPlan control-plan
     class Worker1,Worker2,Worker3 worker
     class NFS nfs
