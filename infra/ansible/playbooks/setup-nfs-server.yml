@@ -1,0 +1,99 @@
+---
+# NFS Server Setup for Ubuntu
+# Based on: https://documentation.ubuntu.com/server/how-to/networking/install-nfs
+
+- name: Setup NFS Server on Ubuntu
+  hosts: storage
+  become: yes
+
+  vars_prompt:
+    - name: ansible_become_pass
+      prompt: "BECOME password"
+      private: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      tags: packages
+
+    - name: Install NFS kernel server
+      apt:
+        name: nfs-kernel-server
+        state: present
+      tags: packages
+
+    - name: Configure NFS to use only v4
+      ini_file:
+        path: /etc/nfs.conf
+        section: nfsd
+        option: "{{ item.option }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { option: "vers2", value: "n" }
+        - { option: "vers3", value: "n" }
+        - { option: "vers4", value: "y" }
+      notify: restart nfs server
+      tags: config
+
+    - name: Create NFS export directory
+      file:
+        path: "{{ nfs_export_path }}"
+        state: directory
+        mode: '0777'
+        owner: nobody
+        group: nogroup
+      tags: directories
+
+    - name: Configure NFS exports
+      blockinfile:
+        path: /etc/exports
+        create: yes
+        marker: "# {mark} ANSIBLE MANAGED BLOCK - K8s NFS"
+        block: |
+          {% for client in nfs_allowed_clients %}
+          {{ nfs_export_path }} {{ client.ip }}({{ nfs_export_options }})
+          {% endfor %}
+      notify: reload nfs exports
+      tags: exports
+
+    - name: Configure UFW firewall rules for NFS
+      ufw:
+        rule: allow
+        port: "{{ item.port }}"
+        proto: "{{ item.proto }}"
+        comment: "NFS {{ item.name }}"
+      loop:
+        - { port: '2049', proto: 'tcp', name: 'nfs' }
+      tags: firewall
+      ignore_errors: yes  # UFW may not be installed/enabled
+
+    - name: Start and enable NFS kernel server
+      systemd:
+        name: nfs-kernel-server
+        state: started
+        enabled: yes
+        daemon_reload: yes
+      tags: services
+
+    - name: Verify NFS exports (NFSv4)
+      command: exportfs -v
+      register: nfs_exports
+      changed_when: false
+      tags: verify
+
+    - name: Display NFS export list (NFSv4)
+      debug:
+        msg: "NFS exports configured: {{ nfs_exports.stdout_lines }}"
+      tags: verify
+
+  handlers:
+    - name: reload nfs exports
+      command: exportfs -ra
+      listen: reload nfs exports
+
+    - name: restart nfs server
+      systemd:
+        name: nfs-kernel-server
+        state: restarted

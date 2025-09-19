@@ -99,9 +99,6 @@ terraform apply
 
 # 배포된 인프라 정보 확인
 terraform output
-
-# Ansible 인벤토리 생성 (추후 사용)
-terraform output -json ansible_inventory > ../ansible/inventory.json
 ```
 
 인스턴스 접속 테스트:
@@ -118,7 +115,7 @@ ssh -i ~/.ssh/ai-k8s-practice ubuntu@$(terraform output -json worker_external_ip
 
 ## 5. 다음 단계
 
-Terraform으로 인프라가 배포되면, Ansible을 사용하여 Kubernetes 클러스터를 구성할 수 있습니다.
+Terraform으로 인프라가 배포되면, [Ansible](../ansible/README.md)을 사용하여 Kubernetes 클러스터를 구성할 수 있습니다.
 
 > **Note**: Ansible 플레이북은 별도로 준비되어야 합니다. 인프라는 Terraform이, 구성 관리는 Ansible이 담당하는 역할 분리 구조입니다.
 

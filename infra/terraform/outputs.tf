@@ -77,9 +77,9 @@ output "ansible_inventory" {
     masters = {
       hosts = {
         (google_compute_instance.k8s_master.name) = {
-          ansible_host        = google_compute_instance.k8s_master.network_interface[0].access_config[0].nat_ip
-          private_ip         = google_compute_instance.k8s_master.network_interface[0].network_ip
-          ansible_user       = "ubuntu"
+          ansible_host = google_compute_instance.k8s_master.network_interface[0].access_config[0].nat_ip
+          private_ip   = google_compute_instance.k8s_master.network_interface[0].network_ip
+          ansible_user = "ubuntu"
         }
       }
     }
