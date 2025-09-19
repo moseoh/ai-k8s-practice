@@ -1,0 +1,17 @@
+---
+# Storage group variables
+ansible_user: moseoh
+
+# NFS server configuration
+nfs_export_path: /srv/k8s
+
+# Allowed clients - K8s cluster nodes + local network
+nfs_allowed_clients:
+  - ip: "34.47.105.155"    # k8s-control-plane-1
+  - ip: "34.47.109.101"    # k8s-node-1
+  - ip: "34.64.180.195"    # k8s-node-2
+  - ip: "34.64.39.193"     # k8s-node-3
+  - ip: "192.168.0.0/24"   # Local network
+
+# NFS export options
+nfs_export_options: "rw,sync,no_subtree_check,no_root_squash"

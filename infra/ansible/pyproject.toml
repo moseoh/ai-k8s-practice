@@ -1,0 +1,10 @@
+[project]
+name = "k8s-ansible"
+version = "0.1.0"
+description = "Ansible playbooks for Kubernetes cluster setup"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "ansible>=12.0.0",
+    "ansible-core>=2.19.2",
+]
