@@ -1,0 +1,10 @@
+---
+# Kubernetes cluster common variables
+ansible_user: ubuntu
+ansible_ssh_private_key_file: ~/.ssh/ai-k8s-practice
+
+containerd_version: "2.1.4"
+calico_version: "v3.30.3"
+
+# Kubernetes cluster configuration
+pod_network_cidr: "10.244.0.0/16"
