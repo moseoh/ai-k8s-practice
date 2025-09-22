@@ -109,15 +109,29 @@ sudo kubeadm init --config=kubeadm-config.yaml
 
 ### 4.2 장기 해결방안 (Containerd v2.x 업그레이드)
 
-Kubernetes 1.36 이상 버전 호환성을 위해 containerd v2.x로 업그레이드 권장:
+Kubernetes 1.36 이상 버전 호환성을 위해 containerd v2.x로 업그레이드 권장.\
+본 환경에서는 공식 문서 가이드를 참고해 containerd를 바이너리로 설치했고, runc 까지는 필요해여 `apt`로 추가 설치한다. (CNI는 추후 Calico 사용)
 
 ```bash
-# Containerd 2.x 설치 (Docker CE 저장소 사용)
-sudo apt-get update
-sudo apt-get install containerd.io
+# Containerd 2.x 바이너리 설치 (curl 사용)
+VER=2.1.4
+ARCH=amd64
+curl -LO https://github.com/containerd/containerd/releases/download/v${VER}/containerd-${VER}-linux-${ARCH}.tar.gz
+sudo tar Cxzvf /usr/local containerd-${VER}-linux-${ARCH}.tar.gz
 
-# 버전 확인
+# systemd 서비스 유닛 등록
+sudo curl -L https://raw.githubusercontent.com/containerd/containerd/main/containerd.service \
+  -o /etc/systemd/system/containerd.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now containerd
+
+# runc 설치 (apt 사용)
+sudo apt-get update
+sudo apt-get install -y runc
+
+# 확인
 containerd --version
+runc --version
 ```
 
 ## 5. 적용된 해결 방법
