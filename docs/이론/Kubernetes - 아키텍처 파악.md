@@ -1,5 +1,3 @@
-# Kubernetes 아키텍처 파악
-
 ## 목차
 1. [Kubernetes 개요](#kubernetes-개요)
 2. [클러스터 구조](#클러스터-구조)

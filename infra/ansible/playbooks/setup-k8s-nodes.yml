@@ -104,6 +104,13 @@
             state: present
             update_cache: true
 
+        - name: NFS 클라이언트 패키지 설치
+          ansible.builtin.apt:
+            name:
+              - nfs-common
+            state: present
+            update_cache: true
+
         - name: containerd 아카이브 다운로드
           ansible.builtin.get_url:
             url: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/containerd-{{ containerd_version }}-linux-amd64.tar.gz"
