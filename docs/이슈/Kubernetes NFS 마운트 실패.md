@@ -12,7 +12,6 @@
   
 ### 초기 증상  
   
-- **발견 시점**: 2025-09-24 12:25:29 UTC  
 - **문제 Pod**: nfs-direct-test  
 - **증상**: Pod가 Pending 상태에서 ContainerCreating으로 진행되지 않음  
 - **영향 범위**: NFS 볼륨을 사용하는 모든 Pod  
