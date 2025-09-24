@@ -1,5 +1,3 @@
-# Kubernetes 실습환경 명세 - Ubuntu 22.04 + GCP + kubeadm
-
 ## 개요
 
 이 문서는 **Kubernetes 클러스터 구축을 위한 기술 명세**를 제공합니다. 실제 구성은 [Terraform](../../infra/terraform/README.md)
