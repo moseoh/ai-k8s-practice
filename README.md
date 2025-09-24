@@ -70,12 +70,25 @@ ai-k8s/
 
 ## 학습 목차
 
-### 1주차: 컨테이너와 Kubernetes 기초
+### 이론
+- [Docker - 아키텍처 파악](./docs/이론/Docker%20-%20아키텍처%20파악.md)
+- [Kubernetes - 아키텍처 파악](./docs/이론/Kubernetes%20-%20아키텍처%20파악.md)
+- [Kubernetes - Deployment](./docs/이론/Kubernetes%20-%20Deployment.md)
+- [Kubernetes - Service와 Ingress](./docs/이론/Kubernetes%20-%20Service와%20Ingress.md)
+- [Kubernetes - ConfigMap과 Secret](./docs/이론/Kubernetes%20-%20ConfigMap과%20Secret.md)
+- [Kubernetes - Storage](./docs/이론/Kubernetes%20-%20Storage.md)
 
-- [컨테이너 이해 - Docker](./docs/week1/01-docker.md)
-- [Kubernetes 아키텍처 파악](./docs/week1/02-kubernetes.md)
-- [실습환경 기술 명세](./docs/week1/03-lab-setup.md)
+### 실습
+- [Kubernetes - 실습 환경 구성](./docs/실습/Kubernetes%20-%20실습%20환경%20구성.md)
+- [Docker - 아키텍처 파악 실습](./docs/실습/Docker%20-%20아키텍처%20파악%20실습.md)
+- [Kubernetes - 아키텍처 파악 실습](./docs/실습/Kubernetes%20-%20아키텍처%20파악%20실습.md)
+- [Kubernetes - Deployment 실습](./docs/실습/Kubernetes%20-%20Deployment%20실습.md)
+- [Kubernetes - Service와 Ingress 실습](./docs/실습/Kubernetes%20-%20Service와%20Ingress%20실습.md)
+- [Kubernetes - ConfigMap과 Secret 실습](./docs/실습/Kubernetes%20-%20ConfigMap과%20Secret%20실습.md)
+- [Kubernetes - Storage 실습](./docs/실습/Kubernetes%20-%20Storage%20실습.md)
 
-## 이슈
+## 이슈 해결
 
-- [cgroup 설정 문제](./docs/issue/cgroup.md)
+- [Kubernetes CGroup Driver 불일치](./docs/이슈/Kubernetes%20CGroup%20Driver%20불일치.md)
+- [Kubernetes NFS 마운트 실패](./docs/이슈/Kubernetes%20NFS%20마운트%20실패.md)
+- [NFSv4 Export 설정 문제](./docs/이슈/NFSv4%20Export%20설정%20문제.md)
